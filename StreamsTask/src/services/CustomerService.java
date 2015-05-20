@@ -55,11 +55,10 @@ public class CustomerService implements CustomerServiceInterface {
 					return c.getBoughtProducts().size()>0;
 			}).mapToInt(c->c.getBoughtProducts().size()).average().getAsDouble();
 	}
-
+	//System.out.println(p.getPrice()); 
 	@Override
 	public boolean wasProductBought(Product p) {
-		// TODO Auto-generated method stub
-		return false;
+		return customers.stream().anyMatch(c-> {  return c.getBoughtProducts().contains(p);});
 	}
 
 	@Override

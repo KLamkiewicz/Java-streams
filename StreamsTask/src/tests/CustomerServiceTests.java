@@ -30,7 +30,7 @@ public class CustomerServiceTests {
 	}
 
 	@Test
-	public void testFndByField(){
+	public void testFindByField(){
 		//CustomerServiceInterface cs = new CustomerService(DataProducer.getTestData(10));
 		//List<Customer> res = cs.findByField("", value);
 	}
@@ -75,7 +75,7 @@ public class CustomerServiceTests {
 	@Test
 	public void testAvgOrders(){
 		double avgOrderWithEmpties = cs.avgOrders(false);
-		assertEquals(4.0, avgOrderWithEmpties, 0.1);
+		assertEquals(4.0, avgOrderWithEmpties, 0.01);
 		
 		double avgOrderWithoutEmpties = cs.avgOrders(true);
 		assertEquals(2.8, avgOrderWithoutEmpties, 0.01);
@@ -83,7 +83,14 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testWasProductBought(){
-	
+		Product p = new Product(3, "Product: 3", 0.3);
+		assertEquals(false, cs.wasProductBought(p));
+		
+		p = new Product(4, "Product: 4", 0.4);
+		assertEquals(true, cs.wasProductBought(p));
+		
+		p = new Product(10, "Product: 10", 1.0);
+		assertEquals(true, cs.wasProductBought(p));
 	}
 	
 	@Test
@@ -99,10 +106,10 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testCountCustomersWhoBought(){
-		Product p = new Product(10, "Product: 10", 1.0);
+		Product p = new Product(10, "Product: 10", 10*0.1);
 		assertEquals(1, cs.countCustomersWhoBought(p));
 		
-		p = new Product(8, "Product: 8", 0.8);
+		p = new Product(8, "Product: 8", 8*0.1);
 		assertEquals(3, cs.countCustomersWhoBought(p));
 	}
 	
