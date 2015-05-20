@@ -91,7 +91,7 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public int countBuys(Product p) {
-		return (int) customers.stream().filter(c->c.getBoughtProducts().contains(p)).count();
+		return (int) customers.stream().mapToLong(c->c.getBoughtProducts().stream().filter(prod->prod.equals(p)).count()).sum();
 	}
 
 	@Override
