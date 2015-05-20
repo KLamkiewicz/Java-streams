@@ -1,5 +1,6 @@
 package services;
 
+import java.lang.reflect.Field;
 import java.util.List;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
@@ -22,8 +23,19 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Customer> findByField(String fieldName, Object value) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream().filter(c->{
+			try{
+				Field f = c.getClass().getDeclaredField(fieldName);
+				f.setAccessible(true);
+				if(value!=null)
+					return f.get(c).equals(value);
+				else
+					return f.get(c) == null;
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+			return false;
+		}).collect(Collectors.toList());
 	}
 
 	@Override

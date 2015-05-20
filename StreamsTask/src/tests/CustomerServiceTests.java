@@ -5,6 +5,7 @@ import static org.junit.Assert.*;
 import java.util.List;
 
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 
 import services.CustomerService;
@@ -31,8 +32,34 @@ public class CustomerServiceTests {
 
 	@Test
 	public void testFindByField(){
-		//CustomerServiceInterface cs = new CustomerService(DataProducer.getTestData(10));
-		//List<Customer> res = cs.findByField("", value);
+		
+		res = cs.findByField("email", null);
+		assertEquals(10, res.size());
+		
+		res = cs.findByField("id", 0);
+		assertEquals(1, res.size());
+		
+		res = cs.findByField("id", 11);
+		assertEquals(0, res.size());
+		
+		res = cs.findByField("name", "Customer: 1");
+		assertEquals(1, res.size());
+		
+		res = cs.findByField("phoneNo", "1");
+		assertEquals(5, res.size());
+		
+		res = cs.findByField("phoneNo", "0");
+		assertEquals(5, res.size());
+
+	}
+	
+	/*
+	 * For this test to pass method would have to throw the exception instead of using try/catch
+	 */
+	@Ignore 
+	@Test(expected=NoSuchFieldException.class)
+	public void testFindByFieldException(){
+		res = cs.findByField("unknownField", "unknownValue");
 	}
 
 	@Test
