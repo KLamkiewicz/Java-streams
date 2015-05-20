@@ -1,9 +1,13 @@
 package services;
 
 import java.lang.reflect.Field;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 import java.util.OptionalDouble;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import entities.Customer;
 import entities.Product;
@@ -75,8 +79,14 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Product> mostPopularProduct() {
-		//return customers.stream().map(c->c.getBoughtProducts().stream().distinct()).flatMap()
-		return null;
+		//incorrect, returns list of the same most popular product instead of one
+		Map<Integer, List<Product>> products = 
+				customers.stream().flatMap(c->c.getBoughtProducts().stream()).
+				collect(Collectors.groupingBy(Product::getId));
+		List<Product> top = products.values().stream().max((p1,p2)->Integer.compare(p1.size(), p2.size())).get();
+		
+		//return null;
+		return top;
 	}
 
 	@Override

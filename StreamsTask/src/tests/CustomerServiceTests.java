@@ -122,8 +122,8 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testMostPopularProduct(){
-		//List<Product> products = cs.mostPopularProduct();
-		//assertEquals(new Product(10, "Product: 10", 10*0.1), products.get(0));
+		assertEquals(7, cs.mostPopularProduct().size());
+		//cs.mostPopularProduct();
 		
 	}
 	
