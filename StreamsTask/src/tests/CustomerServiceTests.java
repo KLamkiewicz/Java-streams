@@ -61,6 +61,14 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testAddProductToAllCustomers(){
+		Product p = new Product(999, "Promotional product", 4.2);
+		
+		assertEquals(3, cs.customersWithNoOrders().size());
+		
+		cs.addProductToAllCustomers(p);
+		assertEquals(0, cs.customersWithNoOrders().size());
+		
+		assertEquals(10, cs.countCustomersWhoBought(p));
 		
 	}
 	
