@@ -95,13 +95,21 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testMostPopularProduct(){
-		List<Product> products = cs.mostPopularProduct();
+		//List<Product> products = cs.mostPopularProduct();
+		//assertEquals(new Product(10, "Product: 10", 10*0.1), products.get(0));
 		
 	}
 	
 	@Test
 	public void testCountBuys(){
+		Product p = new Product(4, "Product: 4", 4*0.1);
+		assertEquals(7, cs.countBuys(p));
 		
+		p = new Product(10, "Product: 10", 10*0.1);
+		assertEquals(1,  cs.countBuys(p));
+		
+		p = new Product(3, "Product: 3", 3*0.1);
+		assertEquals(0,  cs.countBuys(p));
 	}
 	
 	@Test

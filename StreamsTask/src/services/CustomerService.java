@@ -55,7 +55,7 @@ public class CustomerService implements CustomerServiceInterface {
 					return c.getBoughtProducts().size()>0;
 			}).mapToInt(c->c.getBoughtProducts().size()).average().getAsDouble();
 	}
-	//System.out.println(p.getPrice()); 
+
 	@Override
 	public boolean wasProductBought(Product p) {
 		return customers.stream().anyMatch(c-> {  return c.getBoughtProducts().contains(p);});
@@ -63,14 +63,13 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Product> mostPopularProduct() {
-		// TODO Auto-generated method stub
+		//return customers.stream().map(c->c.getBoughtProducts().stream().distinct()).flatMap()
 		return null;
 	}
 
 	@Override
 	public int countBuys(Product p) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) customers.stream().filter(c->c.getBoughtProducts().contains(p)).count();
 	}
 
 	@Override
