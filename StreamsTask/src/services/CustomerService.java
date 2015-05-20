@@ -1,6 +1,7 @@
 package services;
 
 import java.util.List;
+import java.util.OptionalDouble;
 import java.util.stream.Collectors;
 
 import entities.Customer;
@@ -47,8 +48,12 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public double avgOrders(boolean includeEmpty) {
-		// TODO Auto-generated method stub
-		return 0;
+		return customers.stream().filter(c->{
+				if(includeEmpty)
+					return c.getBoughtProducts().size()>=0;
+				else
+					return c.getBoughtProducts().size()>0;
+			}).mapToInt(c->c.getBoughtProducts().size()).average().getAsDouble();
 	}
 
 	@Override

@@ -74,7 +74,11 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testAvgOrders(){
-		double avgOrderWithEmpties = cs.avgOrders(true);
+		double avgOrderWithEmpties = cs.avgOrders(false);
+		assertEquals(4.0, avgOrderWithEmpties, 0.1);
+		
+		double avgOrderWithoutEmpties = cs.avgOrders(true);
+		assertEquals(2.8, avgOrderWithoutEmpties, 0.01);
 	}
 	
 	@Test
