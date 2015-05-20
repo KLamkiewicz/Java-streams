@@ -1,6 +1,7 @@
 package services;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import entities.Customer;
 import entities.Product;
@@ -15,8 +16,7 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Customer> findByName(String name) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream().filter(c->c.getName().equals(name)).collect(Collectors.toList());
 	}
 
 	@Override
