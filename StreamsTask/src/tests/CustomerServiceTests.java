@@ -38,19 +38,25 @@ public class CustomerServiceTests {
 	@Test
 	public void testCustomersWhoBoughtMoreThan(){
 		res = cs.customersWhoBoughtMoreThan(5);
-		
+		assertEquals(2, res.size());
 	}
 	
 	@Test
 	public void testCustomersWhoSpentMoreThan(){
-		res = cs.customersWhoSpentMoreThan(0.2);
+		res = cs.customersWhoSpentMoreThan(4.9);
+		assertEquals(0, res.size());
 		
+		res = cs.customersWhoSpentMoreThan(4.8);
+		assertEquals(1, res.size());
+		
+		res = cs.customersWhoSpentMoreThan(3.9);
+		assertEquals(2, res.size());
 	}
 	
 	@Test
 	public void testCustomersWithNoOrders(){
 		res = cs.customersWithNoOrders();
-		
+		assertEquals(3, res.size());
 	}
 	
 	@Test

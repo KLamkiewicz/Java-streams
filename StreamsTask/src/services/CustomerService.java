@@ -27,20 +27,17 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public List<Customer> customersWhoBoughtMoreThan(int number) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream().filter(c->c.getBoughtProducts().size()>number).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Customer> customersWhoSpentMoreThan(double price) {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream().filter(c->c.getBoughtProducts().stream().mapToDouble(b->b.getPrice()).sum()>price).collect(Collectors.toList());
 	}
 
 	@Override
 	public List<Customer> customersWithNoOrders() {
-		// TODO Auto-generated method stub
-		return null;
+		return customers.stream().filter(c->c.getBoughtProducts().size()==0).collect(Collectors.toList());
 	}
 
 	@Override
