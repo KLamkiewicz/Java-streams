@@ -71,8 +71,7 @@ public class CustomerService implements CustomerServiceInterface {
 
 	@Override
 	public int countCustomersWhoBought(Product p) {
-		// TODO Auto-generated method stub
-		return 0;
+		return (int) customers.stream().filter(c->c.getBoughtProducts().contains(p)).count();
 	}
 
 }

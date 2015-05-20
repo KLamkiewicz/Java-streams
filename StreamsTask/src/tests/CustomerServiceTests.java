@@ -95,7 +95,11 @@ public class CustomerServiceTests {
 	
 	@Test
 	public void testCountCustomersWhoBought(){
+		Product p = new Product(10, "Product: 10", 1.0);
+		assertEquals(1, cs.countCustomersWhoBought(p));
 		
+		p = new Product(8, "Product: 8", 0.8);
+		assertEquals(3, cs.countCustomersWhoBought(p));
 	}
 	
 }
